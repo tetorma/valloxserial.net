@@ -29,7 +29,7 @@ namespace ValloxSerialNet
     /// 
     /// Näherung im "linearen" Bereich 0x73: Temperatur: 0x73 = dez 115 --> Temp = (115-100)/3 = 5 Grad Celsius 
     /// </summary>
-    internal class Vallox
+    public class Vallox
     {
         #region VALLOX_PROTOCOL
 
@@ -45,62 +45,62 @@ namespace ValloxSerialNet
         /// <summary>
         /// contains all information about a variable.
         /// </summary>
-        public static Dictionary<byte, string> VariableNames = new Dictionary<byte, string>()
+        public static Dictionary<Vallox.Variable.VariableNumber, string> VariableNames = new Dictionary<Vallox.Variable.VariableNumber, string>()
         {
-            {0x06, "IoPort FanSpeed-Relays"},
-            {0x07, "IoPort MultiPurpose 1"},
-            {0x08, "IoPort MultiPurpose 2"},
+            {(Vallox.Variable.VariableNumber)0x06, "IoPort FanSpeed-Relays"},
+            {(Vallox.Variable.VariableNumber)0x07, "IoPort MultiPurpose 1"},
+            {(Vallox.Variable.VariableNumber)0x08, "IoPort MultiPurpose 2"},
 
-            {0x29, "Fan Speed"},
-            {0x2A, "Humidity"},
-            {0x2B, "CO2 high"},
-            {0x2C, "CO2 low"},
-            {0x2D, "Machine Installed C02Sensors"},
-            {0x2E, "Current/Voltage in mA incomming on machine"},
+            {(Vallox.Variable.VariableNumber)0x29, "Fan Speed"},
+            {(Vallox.Variable.VariableNumber)0x2A, "Humidity"},
+            {(Vallox.Variable.VariableNumber)0x2B, "CO2 high"},
+            {(Vallox.Variable.VariableNumber)0x2C, "CO2 low"},
+            {(Vallox.Variable.VariableNumber)0x2D, "Machine Installed C02Sensors"},
+            {(Vallox.Variable.VariableNumber)0x2E, "Current/Voltage in mA incomming on machine"},
 
-            {0x2F, "Humidity sensor 1 raw: (x-51)/2.04"},
-            {0x30, "Humidity sensor 2 raw: (x-51)/2.04"},
+            {(Vallox.Variable.VariableNumber)0x2F, "Humidity sensor 1 raw: (x-51)/2.04"},
+            {(Vallox.Variable.VariableNumber)0x30, "Humidity sensor 2 raw: (x-51)/2.04"},
 
-            {0x32, "Temperature outside raw"},
-            {0x33, "Temperature exhaust raw"},
-            {0x34, "Temperature inside raw"},
-            {0x35, "Temperature incomming raw"},
-            {0x36, "Last error number"},
+            {(Vallox.Variable.VariableNumber)0x32, "Temperature outside raw"},
+            {(Vallox.Variable.VariableNumber)0x33, "Temperature exhaust raw"},
+            {(Vallox.Variable.VariableNumber)0x34, "Temperature inside raw"},
+            {(Vallox.Variable.VariableNumber)0x35, "Temperature incomming raw"},
+            {(Vallox.Variable.VariableNumber)0x36, "Last error number"},
 
-            {0x55, "Post heating on counter"},
-            {0x56, "Post heating off time"},
-            {0x57, "Post heating target value"},
+            {(Vallox.Variable.VariableNumber)0x55, "Post heating on counter"},
+            {(Vallox.Variable.VariableNumber)0x56, "Post heating off time"},
+            {(Vallox.Variable.VariableNumber)0x57, "Post heating target value"},
 
-            {0x6C, "Flags 1"},
-            {0x6D, "Flags 2"},
-            {0x6E, "Flags 3"},
-            {0x6F, "Flags 4"},
-            {0x70, "Flags 5"},
-            {0x71, "Flags 6"},
+            {(Vallox.Variable.VariableNumber)0x6C, "Flags 1"},
+            {(Vallox.Variable.VariableNumber)0x6D, "Flags 2"},
+            {(Vallox.Variable.VariableNumber)0x6E, "Flags 3"},
+            {(Vallox.Variable.VariableNumber)0x6F, "Flags 4"},
+            {(Vallox.Variable.VariableNumber)0x70, "Flags 5"},
+            {(Vallox.Variable.VariableNumber)0x71, "Flags 6"},
 
-            {0x79, "Fireplace booster count down minutes"},
+            {(Vallox.Variable.VariableNumber)0x79, "Fireplace booster count down minutes"},
            
-            {0x8F, "Resume bus"},
-            {0x91, "Suspend bus for CO2 communication"},
+            {(Vallox.Variable.VariableNumber)0x8F, "Resume bus"},
+            {(Vallox.Variable.VariableNumber)0x91, "Suspend bus for CO2 communication"},
            
-            {0xA3, "Select"},
-            {0xA4, "Heating set point"},
-            {0xA5, "Fan Speed max"},
-            {0xA6, "Service reminder months"},
-            {0xA7, "Preheating set point"},
-            {0xA8, "Input fan stop temperature threshold"},
-            {0xA9, "Fan Speed min"},
-            {0xAA, "Program"},
-            {0xAB, "Maintencance countdown months"},
+            {(Vallox.Variable.VariableNumber)0xA3, "Select"},
+            {(Vallox.Variable.VariableNumber)0xA4, "Heating set point"},
+            {(Vallox.Variable.VariableNumber)0xA5, "Fan Speed max"},
+            {(Vallox.Variable.VariableNumber)0xA6, "Service reminder months"},
+            {(Vallox.Variable.VariableNumber)0xA7, "Preheating set point"},
+            {(Vallox.Variable.VariableNumber)0xA8, "Input fan stop temperature threshold"},
+            {(Vallox.Variable.VariableNumber)0xA9, "Fan Speed min"},
+            {(Vallox.Variable.VariableNumber)0xAA, "Program"},
+            {(Vallox.Variable.VariableNumber)0xAB, "Maintencance countdown months"},
            
-            {0xAE, "Basic humidity level"},
-            {0xAF, "Heat recovery cell bypass setpoint temperature"},
-            {0xB0, "DC fan input adjustment %"},
-            {0xB1, "DC fan output adjustment %"},
-            {0xB2, "Cell defrosting setpoint temperature"},
-            {0xB3, "CO2 set point upper"},
-            {0xB4, "CO2 set point lower"},
-            {0xB5, "Program 2"},
+            {(Vallox.Variable.VariableNumber)0xAE, "Basic humidity level"},
+            {(Vallox.Variable.VariableNumber)0xAF, "Heat recovery cell bypass setpoint temperature"},
+            {(Vallox.Variable.VariableNumber)0xB0, "DC fan input adjustment %"},
+            {(Vallox.Variable.VariableNumber)0xB1, "DC fan output adjustment %"},
+            {(Vallox.Variable.VariableNumber)0xB2, "Cell defrosting setpoint temperature"},
+            {(Vallox.Variable.VariableNumber)0xB3, "CO2 set point upper"},
+            {(Vallox.Variable.VariableNumber)0xB4, "CO2 set point lower"},
+            {(Vallox.Variable.VariableNumber)0xB5, "Program 2"},
         };
 
         public class Adress
@@ -125,6 +125,8 @@ namespace ValloxSerialNet
 
         public class Variable
         {
+            public enum VariableNumber : Byte
+            {
             // 1 1 1 1 1 1 1 1  
             // | | | | | | | |
             // | | | | | | | +- 0 Speed 1 - 0=0ff 1=on - readonly
@@ -135,7 +137,7 @@ namespace ValloxSerialNet
             // | | +----------- 5 Speed 6 - 0=0ff 1=on - readonly
             // | +------------- 6 Speed 7 - 0=0ff 1=on - readonly
             // +--------------- 7 Speed 8 - 0=0ff 1=on - readonly
-            public const int IoPortFanSpeedRelays = 0x06;
+            /*public const int*/ IoPortFanSpeedRelays = 0x06,
 
             // 1 1 1 1 1 1 1 1 
             // | | | | | | | |
@@ -147,7 +149,7 @@ namespace ValloxSerialNet
             // | | +----------- 5  post-heating on - 0=0ff 1=on - readonly
             // | +------------- 6 
             // +--------------- 7 
-            public const int IoPortMultiPurpose1 = 0x07;
+            /*public const int*/ IoPortMultiPurpose1 = 0x07,
 
             // 1 1 1 1 1 1 1 1  
             // | | | | | | | |
@@ -159,7 +161,7 @@ namespace ValloxSerialNet
             // | | +----------- 5 exhaust-fan - 0=on 1=off
             // | +------------- 6 fireplace-booster - 0=open 1=closed - readonly 
             // +--------------- 7 
-            public const int IoPortMultiPurpose2 = 0x08;
+            /*public const int*/ IoPortMultiPurpose2 = 0x08,
 
             // see FanSpeedMapping
             //01H = speed 1
@@ -170,13 +172,13 @@ namespace ValloxSerialNet
             //3FH = speed 6
             //7FH = speed 7
             //FFH = speed 8
-            public const int FanSpeed = 0x29;
+            /*public const int*/ FanSpeed = 0x29,
 
             // Variables 
             // 33H = 0% FFH = 100%
-            public const int Humidity = 0x2A; // higher measured relative humidity from 2F and 30. Translating Formula (x-51)/2.04
-            public const int Co2High = 0x2B;
-            public const int Co2Low = 0x2C;
+            /*public const int*/ Humidity = 0x2A, // higher measured relative humidity from 2F and 30. Translating Formula (x-51)/2.04
+            /*public const int*/ Co2High = 0x2B,
+            /*public const int*/ Co2Low = 0x2C,
 
             // 1 1 1 1 1 1 1 1 
             // | | | | | | | |
@@ -188,17 +190,17 @@ namespace ValloxSerialNet
             // | | +----------- 5 Sensor5 - 0=not installed 1=installed - readonly
             // | +------------- 6 
             // +--------------- 7 
-            public const int MachineInstalledC02Sensor = 0x2D;
+            /*public const int*/ MachineInstalledC02Sensor = 0x2D,
 
-            public const int CurrentIncomming = 0x2E; // Current/Voltage in mA incomming on machine - readonly
-            
-            public const int HumiditySensor1 = 0x2F; // sensor value: (x-51)/2.04
-            public const int HumiditySensor2 = 0x30; // sensor value: (x-51)/2.04
+            /*public const int*/ CurrentIncomming = 0x2E, // Current/Voltage in mA incomming on machine - readonly
 
-            public const int TempOutside = 0x32;
-            public const int TempExhaust = 0x33;
-            public const int TempInside = 0x34;
-            public const int TempIncomming = 0x35;
+            /*public const int*/ HumiditySensor1 = 0x2F, // sensor value: (x-51)/2.04
+            /*public const int*/ HumiditySensor2 = 0x30, // sensor value: (x-51)/2.04
+
+            /*public const int*/ TempOutside = 0x32,
+            /*public const int*/ TempExhaust = 0x33,
+            /*public const int*/ TempInside = 0x34,
+            /*public const int*/ TempIncomming = 0x35,
 
 
             //05H = Supply air temperature sensor fault
@@ -207,16 +209,16 @@ namespace ValloxSerialNet
             //08H = Extract air sensor fault
             //09h = Water radiator danger of freezing
             //0AH = Exhaust air sensor fault
-            public const int LastErrorNumber = 0x36;
+            /*public const int*/ LastErrorNumber = 0x36,
 
             //Post-heating power-on seconds counter. Percentage of X / 2.5
-            public const int PostHeatingOnCounter = 0x55;
-           
+            /*public const int*/ PostHeatingOnCounter = 0x55,
+
             //Post-heating off time, in seconds, the counter. Percentage of X / 2.5
-            public const int PostHeatingOffTime = 0x56;
+            /*public const int*/ PostHeatingOffTime = 0x56,
 
             //The ventilation zone of air blown to the desired temperature NTC sensor scale
-            public const int PostHeatingTargetValue = 0x57;
+            /*public const int*/ PostHeatingTargetValue = 0x57,
 
             // 1 1 1 1 1 1 1 1 
             // | | | | | | | |
@@ -228,7 +230,7 @@ namespace ValloxSerialNet
             // | | +----------- 5 
             // | +------------- 6 
             // +--------------- 7 
-            public const int Flags1 = 0x6C;
+            /*public const int*/ Flags1 = 0x6C,
 
             // 1 1 1 1 1 1 1 1 
             // | | | | | | | |
@@ -240,7 +242,7 @@ namespace ValloxSerialNet
             // | | +----------- 5 
             // | +------------- 6 CO2 alarm 0=no 1=CO2 alarm
             // +--------------- 7 sensor Frost alarm 0=no 1=a risk of freezing
-            public const int Flags2 = 0x6D;
+            /*public const int*/ Flags2 = 0x6D,
 
             // 1 1 1 1 1 1 1 1 
             // | | | | | | | |
@@ -252,7 +254,7 @@ namespace ValloxSerialNet
             // | | +----------- 5 
             // | +------------- 6 
             // +--------------- 7 
-            public const int Flags3 = 0x6E;
+            /*public const int*/ Flags3 = 0x6E,
 
             // 1 1 1 1 1 1 1 1 
             // | | | | | | | |
@@ -264,7 +266,7 @@ namespace ValloxSerialNet
             // | | +----------- 5 
             // | +------------- 6 
             // +--------------- 7 slave/master selection 0=slave 1=master
-            public const int Flags4 = 0x6F;
+            /*public const int*/ Flags4 = 0x6F,
 
             // 1 1 1 1 1 1 1 1 
             // | | | | | | | |
@@ -276,7 +278,7 @@ namespace ValloxSerialNet
             // | | +----------- 5 
             // | +------------- 6 
             // +--------------- 7 preheating status flag 0=on 1=off
-            public const int Flags5 = 0x70;
+            /*public const int*/ Flags5 = 0x70,
 
             // 1 1 1 1 1 1 1 1 
             // | | | | | | | |
@@ -288,14 +290,14 @@ namespace ValloxSerialNet
             // | | +----------- 5 Activation of the fireplace switch read the variable and set this number one
             // | +------------- 6 fireplace/booster status 0=off 1=on - read only
             // +--------------- 7
-            public const int Flags6 = 0x71;
+            /*public const int*/ Flags6 = 0x71,
 
             //Function time in minutes remaining , descending - readonly
-            public const int FirePlaceBoosterCounter = 0x79;
+            /*public const int*/ FirePlaceBoosterCounter = 0x79,
 
             // Suspend Resume Traffic for CO2 sensor interaction: is sent twice as broadcast
-            public const int SuspendBus = 0x91;
-            public const int ResumeBus = 0x8F;
+            /*public const int*/ SuspendBus = 0x91,
+            /*public const int*/ ResumeBus = 0x8F,
 
             // 1 1 1 1 1 1 1 1
             // | | | | | | | |
@@ -307,24 +309,9 @@ namespace ValloxSerialNet
             // | | +----------- 5 Heating indicator - readonly
             // | +------------- 6 Fault indicator - readonly
             // +--------------- 7 Service reminder - readonly
-            public const int Select = 0xA3;
+            /*public const int*/ Select = 0xA3,
 
-            public const int HeatingSetPoint = 0xA4;
-
-            //01H = Speed 1
-            //03H = Speed 2
-            //07H = Speed 3
-            //0FH = Speed 4
-            //1FH = Speed 5
-            //3FH = Speed 6
-            //7FH = Speed 7
-            //FFH = Speed 8
-            public const int FanSpeedMax = 0xA5;
-
-            public const int ServiceReminder = 0xA6; // months
-            public const int PreHeatingSetPoint = 0xA7;
-
-            public const int InputFanStop = 0xA8;  // Temp threshold: fan stops if input temp falls below this temp.
+            /*public const int*/ HeatingSetPoint = 0xA4,
 
             //01H = Speed 1
             //03H = Speed 2
@@ -334,7 +321,22 @@ namespace ValloxSerialNet
             //3FH = Speed 6
             //7FH = Speed 7
             //FFH = Speed 8
-            public const int FanSpeedMin = 0xA9;
+            /*public const int*/ FanSpeedMax = 0xA5,
+
+            /*public const int*/ ServiceReminder = 0xA6, // months
+            /*public const int*/ PreHeatingSetPoint = 0xA7,
+
+            /*public const int*/ InputFanStop = 0xA8,  // Temp threshold: fan stops if input temp falls below this temp.
+
+            //01H = Speed 1
+            //03H = Speed 2
+            //07H = Speed 3
+            //0FH = Speed 4
+            //1FH = Speed 5
+            //3FH = Speed 6
+            //7FH = Speed 7
+            //FFH = Speed 8
+            /*public const int*/ FanSpeedMin = 0xA9,
 
             // 1 1 1 1 1 1 1 1
             // | | | | _______
@@ -347,20 +349,20 @@ namespace ValloxSerialNet
             // | | +----------- 5 boost switch modde (1=boost, 0 = fireplace)
             // | +------------- 6 radiator type 0 = electric, 1 = water
             // +--------------- 7 cascade adjust 0 = off, 1 = on
-            public const int Program = 0xAA;
+            /*public const int*/ Program = 0xAA,
 
             //The maintenance counter month Inform the next maintenance alarm time remaining months. Descending.
-            public const int MaintenanceMonthCounter = 0xAB;
+            /*public const int*/ MaintenanceMonthCounter = 0xAB,
 
-            public const int BasicHumidityLevel = 0xAE;
-            public const int HrcBypass = 0xAF; // Heat recovery cell bypass setpoint temp
-            public const int DcFanInputAdjustment = 0xB0; // %
-            public const int DcFanOutputAdjustment = 0xB1; // %
+            /*public const int*/ BasicHumidityLevel = 0xAE,
+            /*public const int*/ HrcBypass = 0xAF, // Heat recovery cell bypass setpoint temp
+            /*public const int*/ DcFanInputAdjustment = 0xB0, // %
+            /*public const int*/ DcFanOutputAdjustment = 0xB1, // %
 
-            public const int CellDefrosting = 0xB2; // Defrosting starts when exhaust air drops below this setpoint temp 
+            /*public const int*/ CellDefrosting = 0xB2, // Defrosting starts when exhaust air drops below this setpoint temp 
 
-            public const int Co2SetPointUpper = 0xB3;
-            public const int Co2SetPointLower = 0xB4;
+            /*public const int*/ Co2SetPointUpper = 0xB3,
+            /*public const int*/ Co2SetPointLower = 0xB4,
 
 
             // 1 1 1 1 1 1 1 1
@@ -373,10 +375,11 @@ namespace ValloxSerialNet
             // | | +----------- 5
             // | +------------- 6
             // +--------------- 7
-            public const int Program2 = 0xB5;
+            /*public const int*/ Program2 = 0xB5,
 
             // This one is queried at startup and answered with 3 but not described in the protocol: version?
-            public const int Unknown = 0xC0;
+            /*public const int*/ Unknown = 0xC0,
+        };
         }
 
        
@@ -594,226 +597,226 @@ namespace ValloxSerialNet
         }
 
         // to readable string
-        public static string ConvertVariable(Byte command)
+        public static string ConvertVariable(Variable.VariableNumber command)
         {
-            string variable = string.Format("{0:X02}", command);
+            string variable = string.Format("{0:X02}", (Byte)command);
             switch (command)
             {
-                case Variable.FanSpeed:
+                case Variable.VariableNumber.FanSpeed:
                     {
                         variable = "Fan speed";
                         break;
                     }
 
-                case Variable.Humidity:
+                case Variable.VariableNumber.Humidity:
                     {
                         variable = "Humidity";
                         break;
                     }
 
-                case Variable.Co2High:
+                case Variable.VariableNumber.Co2High:
                     {
                         variable = "CO2 high";
                         break;
                     }
-                case Variable.Co2Low:
+                case Variable.VariableNumber.Co2Low:
                     {
                         variable = "CO2 low";
                         break;
                     }
 
-                case Variable.HumiditySensor1:
+                case Variable.VariableNumber.HumiditySensor1:
                     {
                         variable = "Humidity sensor 1";
                         break;
                     }
-                case Variable.HumiditySensor2:
+                case Variable.VariableNumber.HumiditySensor2:
                     {
                         variable = "Humidity sensor 2";
                         break;
                     }
 
-                case Variable.TempOutside:
+                case Variable.VariableNumber.TempOutside:
                     {
                         variable = "Temp outside";
                         break;
                     }
-                case Variable.TempExhaust:
+                case Variable.VariableNumber.TempExhaust:
                     {
                         variable = "Temp exhaust";
                         break;
                     }
-                case Variable.TempInside:
+                case Variable.VariableNumber.TempInside:
                     {
                         variable = "Temp inside";
                         break;
                     }
-                case Variable.TempIncomming:
+                case Variable.VariableNumber.TempIncomming:
                     {
                         variable = "Temp incomming";
                         break;
                     }
-                case Variable.Select:
+                case Variable.VariableNumber.Select:
                     {
                         variable = "Select";
                         break;
                     }
-                case Variable.HeatingSetPoint:
+                case Variable.VariableNumber.HeatingSetPoint:
                     {
                         variable = "Heating set point";
                         break;
                     }
-                case Variable.FanSpeedMax:
+                case Variable.VariableNumber.FanSpeedMax:
                     {
                         variable = "Fan speed max";
                         break;
                     }
-                case Variable.ServiceReminder:
+                case Variable.VariableNumber.ServiceReminder:
                     {
                         variable = "Service reminder";
                         break;
                     }
-                case Variable.PreHeatingSetPoint:
+                case Variable.VariableNumber.PreHeatingSetPoint:
                     {
                         variable = "Pre heating set point";
                         break;
                     }
-                case Variable.InputFanStop:
+                case Variable.VariableNumber.InputFanStop:
                     {
                         variable = "Input fan speed stop temp";
                         break;
                     }
-                case Variable.FanSpeedMin:
+                case Variable.VariableNumber.FanSpeedMin:
                     {
                         variable = "Fan speed min";
                         break;
                     }
-                case Variable.Program:
+                case Variable.VariableNumber.Program:
                     {
                         variable = "Program";
                         break;
                     }
-                case Variable.BasicHumidityLevel:
+                case Variable.VariableNumber.BasicHumidityLevel:
                     {
                         variable = "Basic humidity level";
                         break;
                     }
-                case Variable.HrcBypass:
+                case Variable.VariableNumber.HrcBypass:
                     {
                         variable = "HRC bypass";
                         break;
                     }
-                case Variable.DcFanInputAdjustment:
+                case Variable.VariableNumber.DcFanInputAdjustment:
                     {
                         variable = "DC fan input adjustment";
                         break;
                     }
-                case Variable.DcFanOutputAdjustment:
+                case Variable.VariableNumber.DcFanOutputAdjustment:
                     {
                         variable = "DC fan output adjustment";
                         break;
                     }
-                case Variable.CellDefrosting:
+                case Variable.VariableNumber.CellDefrosting:
                     {
                         variable = "Cell defrosting";
                         break;
                     }
-                case Variable.Co2SetPointUpper:
+                case Variable.VariableNumber.Co2SetPointUpper:
                     {
                         variable = "CO2 set point upper";
                         break;
                     }
-                case Variable.Co2SetPointLower:
+                case Variable.VariableNumber.Co2SetPointLower:
                     {
                         variable = "CO2 set point lower";
                         break;
                     }
-                case Variable.Program2:
+                case Variable.VariableNumber.Program2:
                     {
                         variable = "Program2";
                         break;
                     }
-                case Variable.Flags1:
+                case Variable.VariableNumber.Flags1:
                     {
                         variable = "Flags1";
                         break;
                     }
-                case Variable.Flags2:
+                case Variable.VariableNumber.Flags2:
                     {
                         variable = "Flags2";
                         break;
                     }
-                case Variable.Flags3:
+                case Variable.VariableNumber.Flags3:
                     {
                         variable = "Flags3";
                         break;
                     }
-                case Variable.Flags4:
+                case Variable.VariableNumber.Flags4:
                     {
                         variable = "Flags4";
                         break;
                     }
-                case Variable.Flags5:
+                case Variable.VariableNumber.Flags5:
                     {
                         variable = "Flags5";
                         break;
                     }
-                case Variable.Flags6:
+                case Variable.VariableNumber.Flags6:
                     {
                         variable = "Flags6";
                         break;
                     }
-                case Variable.IoPortFanSpeedRelays:
+                case Variable.VariableNumber.IoPortFanSpeedRelays:
                     {
                         variable = "IoPortFanSpeedRelays";
                         break;
                     }
-                case Variable.IoPortMultiPurpose1:
+                case Variable.VariableNumber.IoPortMultiPurpose1:
                     {
                         variable = "IoPortMultiPurpose1";
                         break;
                     }
-                case Variable.IoPortMultiPurpose2:
+                case Variable.VariableNumber.IoPortMultiPurpose2:
                     {
                         variable = "IoPortMultiPurpose2";
                         break;
                     }
-                case Variable.MachineInstalledC02Sensor:
+                case Variable.VariableNumber.MachineInstalledC02Sensor:
                     {
                         variable = "MachineInstalledC02Sensor";
                         break;
                     }
-                case Variable.PostHeatingOnCounter:
+                case Variable.VariableNumber.PostHeatingOnCounter:
                     {
                         variable = "PostHeatingOnCounter";
                         break;
                     }
-                case Variable.PostHeatingOffTime:
+                case Variable.VariableNumber.PostHeatingOffTime:
                     {
                         variable = "PostHeatingOffTime";
                         break;
                     }
-                case Variable.PostHeatingTargetValue:
+                case Variable.VariableNumber.PostHeatingTargetValue:
                     {
                         variable = "PostHeatingTargetValue";
                         break;
                     }
-                case Variable.FirePlaceBoosterCounter:
+                case Variable.VariableNumber.FirePlaceBoosterCounter:
                     {
                         variable = "FirePlaceBoosterCounter";
                         break;
                     }
-                case Variable.MaintenanceMonthCounter:
+                case Variable.VariableNumber.MaintenanceMonthCounter:
                     {
                         variable = "MaintenanceMonthCounter";
                         break;
                     }
-                case Variable.LastErrorNumber:
+                case Variable.VariableNumber.LastErrorNumber:
                     {
                         variable = "LastErrorNumber";
                         break;
                     }
-                case Variable.Unknown:
+                case Variable.VariableNumber.Unknown:
                     {
                         variable = "Unknown";
                         break;
@@ -866,9 +869,9 @@ namespace ValloxSerialNet
         }
 
         // Domain is always 1 with checksum
-        public static Byte[] CreateTelegram(Byte sender, Byte receiver, Byte variable, Byte value)
+        public static Byte[] CreateTelegram(Byte sender, Byte receiver, Vallox.Variable.VariableNumber variable, Byte value)
         {
-            Byte[] telegram = new Byte[Vallox.TelegramLength] { Vallox.Domain, sender, receiver, variable, value, 0x00 };
+            Byte[] telegram = new Byte[Vallox.TelegramLength] { Vallox.Domain, sender, receiver, (Byte)variable, value, 0x00 };
             telegram[Vallox.TelegramLength - 1] = ComputeCheckSum(telegram);
             return telegram;
         }

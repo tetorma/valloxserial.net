@@ -157,7 +157,7 @@ namespace ValloxSerialNet
             if (IsConnected)
             {
                 Byte fanSpeed = Vallox.ConvertBackFanSpeed(SelectedFanSpeed - 1);
-                Byte[] telegram = Vallox.CreateTelegram(_senderId, Vallox.Adress.Master, Vallox.Variable.FanSpeed,
+                Byte[] telegram = Vallox.CreateTelegram(_senderId, Vallox.Adress.Master, Vallox.Variable.VariableNumber.FanSpeed,
                     fanSpeed);
                 _serialPort.Write(telegram, 0, telegram.Length);
             }
@@ -178,7 +178,7 @@ namespace ValloxSerialNet
             ReadVariable(variable);
         }
 
-        public void WriteVariable(Byte variable, Byte value)
+        public void WriteVariable(Vallox.Variable.VariableNumber variable, Byte value)
         {
             if (IsConnected)
             {
@@ -189,7 +189,7 @@ namespace ValloxSerialNet
 
         public void ExecuteWriteVariable()
         {
-            Byte variable = SelectedVariable;
+            Vallox.Variable.VariableNumber variable = (Vallox.Variable.VariableNumber)SelectedVariable;
             Byte value = SelectedValue;
             WriteVariable(variable, value);
         }
@@ -1106,79 +1106,79 @@ namespace ValloxSerialNet
             if (receiver == Vallox.Adress.Panel1 || receiver == Vallox.Adress.Panel8 || receiver == _senderId ||
                 receiver == Vallox.Adress.Panels) // TODO: right now 0x20 0x21 0x22 are received
             {
-                Byte variable = command;
+                var variable = (Vallox.Variable.VariableNumber)command;
 
                 ValloxVariable variableItem = GetVariableItem(variable);
                 variableItem.Value = value;
 
                 switch (variable)
                 {
-                    case Vallox.Variable.FanSpeed:
+                    case Vallox.Variable.VariableNumber.FanSpeed:
                     {
                         int fanSpeed = Vallox.ConvertFanSpeed(value);
                         WriteLine("Fan speed {0}", fanSpeed);
                         FanSpeed = fanSpeed;
                         break;
                     }
-                    case Vallox.Variable.Humidity:
+                    case Vallox.Variable.VariableNumber.Humidity:
                     {
                         WriteLine("Humidity {0}%", value);
                         Humidity = value;
                         break;
                     }
-                    case Vallox.Variable.Co2High:
+                    case Vallox.Variable.VariableNumber.Co2High:
                     {
                         WriteLine("CO2 high {0}", value);
                         Co2High = value;
                         break;
                     }
-                    case Vallox.Variable.Co2Low:
+                    case Vallox.Variable.VariableNumber.Co2Low:
                     {
                         WriteLine("CO2 low {0}", value);
                         Co2Low = value;
                         break;
                     }
-                    case Vallox.Variable.HumiditySensor1:
+                    case Vallox.Variable.VariableNumber.HumiditySensor1:
                     {
                         WriteLine("%RH1 {0}", value);
                         HumiditySensor1 = value;
                         break;
                     }
-                    case Vallox.Variable.HumiditySensor2:
+                    case Vallox.Variable.VariableNumber.HumiditySensor2:
                     {
                         WriteLine("%RH2 {0}", value);
                         HumiditySensor2 = value;
                         break;
                     }
-                    case Vallox.Variable.TempOutside:
+                    case Vallox.Variable.VariableNumber.TempOutside:
                     {
                         int temperature = Vallox.ConvertTemp(value);
                         WriteLine("Temperature outside {0}°", temperature);
                         TempOutside = temperature;
                         break;
                     }
-                    case Vallox.Variable.TempExhaust:
+                    case Vallox.Variable.VariableNumber.TempExhaust:
                     {
                         int temperature = Vallox.ConvertTemp(value);
                         WriteLine("Temperature exhaust {0}°", temperature);
                         TempExhaust = temperature;
                         break;
                     }
-                    case Vallox.Variable.TempInside:
+                    case Vallox.Variable.VariableNumber.TempInside:
                     {
                         int temperature = Vallox.ConvertTemp(value);
                         WriteLine("Temperature inside {0}°", temperature);
                         TempInside = temperature;
                         break;
                     }
-                    case Vallox.Variable.TempIncomming:
+                    case Vallox.Variable.VariableNumber.TempIncomming:
                     {
                         int temperature = Vallox.ConvertTemp(value);
                         WriteLine("Temperature incomming {0}°", temperature);
                         TempIncomming = temperature;
                         break;
                     }
-                    case Vallox.Variable.Select:
+                    case Vallox.Variable.VariableNumber.Select:
                     {
                         WriteLine("Select {0}", value);
 
@@ -1206,48 +1206,48 @@ namespace ValloxSerialNet
                         ServiceReminderIndicator = serviceReminderIndicator;
                         break;
                     }
-                    case Vallox.Variable.HeatingSetPoint:
+                    case Vallox.Variable.VariableNumber.HeatingSetPoint:
                     {
                         int temperature = Vallox.ConvertTemp(value);
                         WriteLine("Heating set point temperature {0}°", temperature);
                         HeatingSetPoint = temperature;
                         break;
                     }
-                    case Vallox.Variable.FanSpeedMax:
+                    case Vallox.Variable.VariableNumber.FanSpeedMax:
                     {
                         int fanSpeed = Vallox.ConvertFanSpeed(value);
                         WriteLine("Fan speed max {0}", fanSpeed);
                         FanSpeedMax = fanSpeed;
                         break;
                     }
-                    case Vallox.Variable.ServiceReminder:
+                    case Vallox.Variable.VariableNumber.ServiceReminder:
                     {
                         WriteLine("Service reminder {0}", value);
                         ServiceReminder = value;
                         break;
                     }
-                    case Vallox.Variable.PreHeatingSetPoint:
+                    case Vallox.Variable.VariableNumber.PreHeatingSetPoint:
                     {
                         int temperature = Vallox.ConvertTemp(value);
                         WriteLine("Pre heating set point {0}°", temperature);
                         PreHeatingSetPoint = temperature;
                         break;
                     }
-                    case Vallox.Variable.InputFanStop:
+                    case Vallox.Variable.VariableNumber.InputFanStop:
                     {
                         int temperature = Vallox.ConvertTemp(value);
                         WriteLine("Input fan stop below temp {0}°", temperature);
                         InputFanStopThreshold = temperature;
                         break;
                     }
-                    case Vallox.Variable.FanSpeedMin:
+                    case Vallox.Variable.VariableNumber.FanSpeedMin:
                     {
                         int fanSpeed = Vallox.ConvertFanSpeed(value);
                         WriteLine("Fan speed min {0}", fanSpeed);
                         FanSpeedMin = fanSpeed;
                         break;
                     }
-                    case Vallox.Variable.Program:
+                    case Vallox.Variable.VariableNumber.Program:
                     {
                         WriteLine("Program {0}", value);
 
@@ -1267,51 +1267,51 @@ namespace ValloxSerialNet
                         CascadeAdjust = cascadeAdjust;
                         break;
                     }
-                    case Vallox.Variable.BasicHumidityLevel:
+                    case Vallox.Variable.VariableNumber.BasicHumidityLevel:
                     {
                         WriteLine("Basic humidity level {0}%", value);
                         BasicHumidityLevel = value;
                         break;
                     }
-                    case Vallox.Variable.HrcBypass:
+                    case Vallox.Variable.VariableNumber.HrcBypass:
                     {
                         int temperature = Vallox.ConvertTemp(value);
                         WriteLine("HRC bypass {0}°", temperature);
                         HrcBypassThreshold = temperature;
                         break;
                     }
-                    case Vallox.Variable.DcFanInputAdjustment:
+                    case Vallox.Variable.VariableNumber.DcFanInputAdjustment:
                     {
                         WriteLine("DC fan input adjustment {0}%", value);
                         DcFanInputAdjustment = value;
                         break;
                     }
-                    case Vallox.Variable.DcFanOutputAdjustment:
+                    case Vallox.Variable.VariableNumber.DcFanOutputAdjustment:
                     {
                         WriteLine("DC fan output adjustment {0}%", value);
                         DcFanOutputAdjustment = value;
                         break;
                     }
-                    case Vallox.Variable.CellDefrosting:
+                    case Vallox.Variable.VariableNumber.CellDefrosting:
                     {
                         int temperature = Vallox.ConvertTemp(value);
                         WriteLine("Cell defrosting below temperature {0}°", temperature);
                         CellDefrostingThreshold = temperature;
                         break;
                     }
-                    case Vallox.Variable.Co2SetPointUpper:
+                    case Vallox.Variable.VariableNumber.Co2SetPointUpper:
                     {
                         WriteLine("CO2 set point upper {0}", value);
                         Co2SetPointUpper = value;
                         break;
                     }
-                    case Vallox.Variable.Co2SetPointLower:
+                    case Vallox.Variable.VariableNumber.Co2SetPointLower:
                     {
                         WriteLine("CO2 set point lower {0}", value);
                         Co2SetPointLower = value;
                         break;
                     }
-                    case Vallox.Variable.Program2:
+                    case Vallox.Variable.VariableNumber.Program2:
                     {
                         WriteLine("Program2 {0}", value);
                         Vallox.MaxSpeedLimitMode maxSpeedLimitMode;
@@ -1319,98 +1319,98 @@ namespace ValloxSerialNet
                         MaxSpeedLimitMode = maxSpeedLimitMode;
                         break;
                     }
-                    case Vallox.Variable.Unknown:
+                    case Vallox.Variable.VariableNumber.Unknown:
                     {
                         WriteLine("Unkown at {0} {1}", DateTime.Now.ToShortTimeString(), value);
                         break;
                     }
-                    case Vallox.Variable.Flags1:
+                    case Vallox.Variable.VariableNumber.Flags1:
                     {
                         WriteLine("Flags1 {0}", value);
                         break;
                     }
-                    case Vallox.Variable.Flags2:
+                    case Vallox.Variable.VariableNumber.Flags2:
                     {
                         WriteLine("Flags2 {0}", value);
                         break;
                     }
-                    case Vallox.Variable.Flags3:
+                    case Vallox.Variable.VariableNumber.Flags3:
                     {
                         WriteLine("Flags3 {0}", value);
                         break;
                     }
-                    case Vallox.Variable.Flags4:
+                    case Vallox.Variable.VariableNumber.Flags4:
                     {
                         WriteLine("Flags4 {0}", value);
                         break;
                     }
-                    case Vallox.Variable.Flags5:
+                    case Vallox.Variable.VariableNumber.Flags5:
                     {
                         WriteLine("Flags5 {0}", value);
                         break;
                     }
-                    case Vallox.Variable.Flags6:
+                    case Vallox.Variable.VariableNumber.Flags6:
                     {
                         WriteLine("Flags6 {0}", value);
                         break;
                     }
-                    case Vallox.Variable.IoPortFanSpeedRelays:
+                    case Vallox.Variable.VariableNumber.IoPortFanSpeedRelays:
                     {
                         WriteLine("IoPortFanSpeedRelays {0}", value);
                         break;
                     }
-                    case Vallox.Variable.IoPortMultiPurpose1:
+                    case Vallox.Variable.VariableNumber.IoPortMultiPurpose1:
                     {
                         WriteLine("IoPortMultiPurpose1 {0}", value);
                         break;
                     }
-                    case Vallox.Variable.IoPortMultiPurpose2:
+                    case Vallox.Variable.VariableNumber.IoPortMultiPurpose2:
                     {
                         WriteLine("IoPortMultiPurpose2 {0}", value);
                         break;
                     }
-                    case Vallox.Variable.MachineInstalledC02Sensor:
+                    case Vallox.Variable.VariableNumber.MachineInstalledC02Sensor:
                     {
                         WriteLine("MachineInstalledC02Sensor {0}", value);
                         break;
                     }
-                    case Vallox.Variable.PostHeatingOnCounter:
+                    case Vallox.Variable.VariableNumber.PostHeatingOnCounter:
                     {
                         WriteLine("PostHeatingOnCounter {0}", value);
                         break;
                     }
-                    case Vallox.Variable.PostHeatingOffTime:
+                    case Vallox.Variable.VariableNumber.PostHeatingOffTime:
                     {
                         WriteLine("PostHeatingOffTime {0}", value);
                         break;
                     }
-                    case Vallox.Variable.PostHeatingTargetValue:
+                    case Vallox.Variable.VariableNumber.PostHeatingTargetValue:
                     {
                         WriteLine("PostHeatingTargetValue {0}", value);
                         break;
                     }
-                    case Vallox.Variable.FirePlaceBoosterCounter:
+                    case Vallox.Variable.VariableNumber.FirePlaceBoosterCounter:
                     {
                         WriteLine("FirePlaceBoosterCounter {0}", value);
                         break;
                     }
-                    case Vallox.Variable.LastErrorNumber:
+                    case Vallox.Variable.VariableNumber.LastErrorNumber:
                     {
                         WriteLine("LastErrorNumber {0}", value);
                         break;
                     }
-                    case Vallox.Variable.MaintenanceMonthCounter:
+                    case Vallox.Variable.VariableNumber.MaintenanceMonthCounter:
                     {
                         WriteLine("MaintenanceMonthCounter {0}", value);
                         break;
                     }
-                    case Vallox.Variable.SuspendBus:
+                    case Vallox.Variable.VariableNumber.SuspendBus:
                     {
                         WriteLine("Suspend bus for C02 sensor cummunication at {0} {1}",
                             DateTime.Now.ToShortTimeString(), value);
                         break;
                     }
-                    case Vallox.Variable.ResumeBus:
+                    case Vallox.Variable.VariableNumber.ResumeBus:
                     {
                         WriteLine("Resume bus for all devices at {0} {1}", DateTime.Now.ToShortTimeString(), value);
                         break;
@@ -1427,18 +1427,18 @@ namespace ValloxSerialNet
             {
                 if (command == 0)
                 {
-                    string variable = Vallox.ConvertVariable(value);
+                    string variable = Vallox.ConvertVariable((Vallox.Variable.VariableNumber)value);
                     WriteLine("{0:X02} --> {1:X02}: get {2}", senderString, receiverString, variable);
                 }
                 else
                 {
-                    string variable = Vallox.ConvertVariable(command);
+                    string variable = Vallox.ConvertVariable((Vallox.Variable.VariableNumber)command);
                     WriteLine("{0:X02} --> {1:X02}: set {2} = 0x{3:X02}", senderString, receiverString, variable, value);
                 }
             }
         }
 
-        private ValloxVariable GetVariableItem(byte variable)
+        private ValloxVariable GetVariableItem(Vallox.Variable.VariableNumber variable)
         {
             ValloxVariable foundVariable = null;
             foreach (ValloxVariable valloxVariable in _variables)
@@ -1460,7 +1460,7 @@ namespace ValloxSerialNet
             return foundVariable;
         }
 
-        private string GetVariableDescription(byte variable)
+        private string GetVariableDescription(Vallox.Variable.VariableNumber variable)
         {
             string description;
 

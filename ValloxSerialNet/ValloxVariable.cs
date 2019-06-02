@@ -3,19 +3,19 @@
     /// <summary>
     /// Contains one single variable.
     /// </summary>
-    internal class ValloxVariable : NotificationObject
+    public class ValloxVariable : NotificationObject
     {
         private byte _value = 0;
         private int _counter = 1;
 
-        public ValloxVariable(byte id, string description)
+        public ValloxVariable(Vallox.Variable.VariableNumber id, string description)
         {
             Id = id;
             Description = description;
         }
 
         public string Description { get; private set; }
-        public byte Id { get; private set; }
+        public Vallox.Variable.VariableNumber Id { get; private set; }
 
         public byte Value
         {
